@@ -105,3 +105,12 @@ task dist(){
 }
 dist.dependsOn distZip
 dist.dependsOn distTar
+
+apply plugin: 'maven'
+
+task writeNewPom {
+    pom {
+        project {
+        }
+    }.writeTo("pom.xml")
+}

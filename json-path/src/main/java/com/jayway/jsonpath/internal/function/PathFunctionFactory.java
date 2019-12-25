@@ -9,6 +9,7 @@ import com.jayway.jsonpath.internal.function.numeric.StandardDeviation;
 import com.jayway.jsonpath.internal.function.numeric.Sum;
 import com.jayway.jsonpath.internal.function.text.Concatenate;
 import com.jayway.jsonpath.internal.function.text.Length;
+import com.jayway.jsonpath.internal.function.transform.Transform;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -17,10 +18,9 @@ import java.util.Map;
 /**
  * Implements a factory that given a name of the function will return the Function implementation, or null
  * if the value is not obtained.
- *
+ * <p>
  * Leverages the function's name in order to determine which function to execute which is maintained internally
  * here via a static map
- *
  */
 public class PathFunctionFactory {
 
@@ -45,6 +45,8 @@ public class PathFunctionFactory {
         map.put("size", Length.class);
         map.put("append", Append.class);
 
+        map.put("transform", Transform.class);
+
 
         FUNCTIONS = Collections.unmodifiableMap(map);
     }
@@ -52,24 +54,19 @@ public class PathFunctionFactory {
     /**
      * Returns the function by name or throws InvalidPathException if function not found.
      *
+     * @param name The name of the function
+     * @return The implementation of a function
+     * @throws InvalidPathException
      * @see #FUNCTIONS
      * @see PathFunction
-     *
-     * @param name
-     *      The name of the function
-     *
-     * @return
-     *      The implementation of a function
-     *
-     * @throws InvalidPathException
      */
     public static PathFunction newFunction(String name) throws InvalidPathException {
         Class functionClazz = FUNCTIONS.get(name);
-        if(functionClazz == null){
+        if (functionClazz == null) {
             throw new InvalidPathException("Function with name: " + name + " does not exist.");
         } else {
             try {
-                return (PathFunction)functionClazz.newInstance();
+                return (PathFunction) functionClazz.newInstance();
             } catch (Exception e) {
                 throw new InvalidPathException("Function of name: " + name + " cannot be created", e);
             }

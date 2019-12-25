@@ -17,3 +17,12 @@ dependencies {
 
     testCompile libs.test
 }
+
+apply plugin: 'maven'
+
+task writeNewPom {
+    pom {
+        project {
+        }
+    }.writeTo("pom.xml")
+}

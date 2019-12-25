@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.jayway.jsonpath</groupId>
+    <artifactId>json-path-parent</artifactId>
+    <version>2.4.0</version>
+
+    <packaging>pom</packaging>
+    <modules>
+        <module>json-path</module>
+        <module>json-path-assert</module>
+        <module>json-path-web-test</module>
+    </modules>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>1.8</java.version>
+        <!--<spring-framework.verion>4.3.8.RELEASE</spring-framework.verion>-->
+        <!--<waimai_lib_mtauth.version>1.0.3-SNAPSHOT</waimai_lib_mtauth.version>-->
+    </properties>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.6.2</version>
+                    <!--用这个而不用gmaven的原因:https://github.com/groovy/groovy-eclipse/wiki/Groovy-Eclipse-Maven-plugin-->
+                    <configuration>
+                        <!--<compilerId>groovy-eclipse-compiler</compilerId>-->
+                        <source>${java.version}</source>
+                        <target>${java.version}</target>
+                        <encoding>UTF-8</encoding>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+</project>

@@ -42,3 +42,12 @@ dependencies {
         exclude module: 'jackson-core:com.fasterxml.jackson.core'
     }
 }
+
+apply plugin: 'maven'
+
+task writeNewPom {
+    pom {
+        project {
+        }
+    }.writeTo("pom.xml")
+}
